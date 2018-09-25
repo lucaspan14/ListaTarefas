@@ -10,7 +10,6 @@ public class Tarefa {
     public Tarefa(){
         id = id++;
     }
-
     public String getNome() {
         return nome;
     }
