@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private SQLiteDatabase bancoDeDados;
     private AdapterTarefas adaptadorTarefa;
     private List<Tarefa> itens;
+    private Tarefa tarefaLista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +60,15 @@ public class MainActivity extends AppCompatActivity {
                 bancoDeDados.execSQL("INSERT INTO tarefas (tarefa) VALUES ('" + texto + "')");
                 recuperarTarefas();
                 textoTarefa.setText("");
+                tarefaLista = new Tarefa(texto, "descrição");
+                itens.add(tarefaLista);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
     private void recuperarTarefas() {
         try {
             //recuperar as tarefas
@@ -73,23 +77,21 @@ public class MainActivity extends AppCompatActivity {
             int indiceColunaId = cursor.getColumnIndex("id");
             int indiceColunaTarefa = cursor.getColumnIndex("tarefa");
             listaTarefas();
-
             cursor.moveToFirst();
             while (cursor != null) {
-                Log.i("Resultado - ", "Tarefa: " + cursor.getString(indiceColunaTarefa));
-
                 cursor.moveToNext();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private void listaTarefas(){
+
+    private void listaTarefas() {
         try {
             listaTarefas = findViewById(R.id.listaTarefas);
             adaptadorTarefa = new AdapterTarefas(this, itens);
             listaTarefas.setAdapter(adaptadorTarefa);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
