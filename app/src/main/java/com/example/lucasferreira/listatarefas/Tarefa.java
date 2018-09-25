@@ -1,13 +1,14 @@
 package com.example.lucasferreira.listatarefas;
 
+
 public class Tarefa {
     private String nome;
     private int status = 0;
     private String descricao;
+    private static int id = 0;
 
-    public Tarefa( String nome, String descricao){
-        this.nome = nome;
-        this.descricao = descricao;
+    public Tarefa(){
+        id = id++;
     }
 
     public String getNome() {
@@ -32,5 +33,8 @@ public class Tarefa {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+    public int getId(){
+        return id;
     }
 }

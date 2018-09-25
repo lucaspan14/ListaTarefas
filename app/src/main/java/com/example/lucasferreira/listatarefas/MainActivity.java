@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             botaoAdd = findViewById(R.id.botaoAdicionar);
             //banco de dados
             bancoDeDados = openOrCreateDatabase("apptarefas", MODE_PRIVATE, null);
-            bancoDeDados.execSQL("CREATE TABLE IF NOT EXISTS tarefas(id INTEGER PRIMARY KEY AUTOINCREMENT, tarefa VARCHAR)");
+            bancoDeDados.execSQL("CREATE TABLE IF NOT EXISTS tarefas(id INTEGER , tarefa VARCHAR)");
             botaoAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -57,18 +57,17 @@ public class MainActivity extends AppCompatActivity {
             if (texto.equals("")) {
                 Toast.makeText(MainActivity.this, "Digite uma tarefa ", Toast.LENGTH_SHORT).show();
             } else {
-                bancoDeDados.execSQL("INSERT INTO tarefas (tarefa) VALUES ('" + texto + "')");
-                recuperarTarefas();
+                tarefaLista = new Tarefa();
+                bancoDeDados.execSQL("INSERT INTO tarefas (tarefa, id) VALUES ('" + texto + "," + String.valueOf(tarefaLista.getId())+ "')");
                 textoTarefa.setText("");
-                tarefaLista = new Tarefa(texto, "descrição");
                 itens.add(tarefaLista);
+                recuperarTarefas();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
     private void recuperarTarefas() {
         try {
             //recuperar as tarefas
@@ -79,8 +78,10 @@ public class MainActivity extends AppCompatActivity {
             listaTarefas();
             cursor.moveToFirst();
             while (cursor != null) {
+                cursor.getString(Integer.parseInt(cursor.getString(indiceColunaId)));
                 cursor.moveToNext();
             }
+            cursor.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
