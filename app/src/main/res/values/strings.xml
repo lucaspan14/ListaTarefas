@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ListaTarefas</string>
     <string name="adicionar">Adicionar</string>
+    <string name="hint">Tente fazer alguma coisa com essa view</string>
 </resources>
