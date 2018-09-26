@@ -2,13 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="#164060">
+
     <TextView
         android:id="@+id/nome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:textColorHint="@android:color/holo_blue_light"
+        android:textColorLink="@android:color/holo_blue_dark"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"/>
     <TextView
         android:id="@+id/descricao"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:textColor="#FFFFFF"/>
 </LinearLayout>

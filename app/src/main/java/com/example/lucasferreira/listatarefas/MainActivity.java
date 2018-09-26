@@ -1,99 +1,48 @@
 package com.example.lucasferreira.listatarefas;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.database.Cursor;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private EditText textoTarefa;
+    private List<Tarefa> listaTarefas;
+    private ListView viewTarefas;
+    private EditText editarNome;
     private Button botaoAdd;
-    private ListView listaTarefas;
-    private SQLiteDatabase bancoDeDados;
-    private AdapterTarefas adaptadorTarefa;
-    private List<Tarefa> itens;
-    private Tarefa tarefaLista;
+    private Tarefa itemTarefa;
+    private AdapterTarefas adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try {
-            // recuperar componentes
-            textoTarefa = findViewById(R.id.nomeTarefa);
-            botaoAdd = findViewById(R.id.botaoAdicionar);
-            //banco de dados
-            bancoDeDados = openOrCreateDatabase("apptarefas", MODE_PRIVATE, null);
-            bancoDeDados.execSQL("CREATE TABLE IF NOT EXISTS tarefas(id INTEGER , tarefa VARCHAR)");
-            botaoAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String textoDigitado = textoTarefa.getText().toString();
-                    salvarTarefa(textoDigitado);
-                }
+        botaoAdd = findViewById(R.id.botaoAdicionar);
+        editarNome = findViewById(R.id.nomeTarefa);
+        viewTarefas = findViewById(R.id.listaTarefas);
 
-            });
-            // Listar tarefas
-            recuperarTarefas();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+        listaTarefas =  new ArrayList<>();
 
-    private void salvarTarefa(String texto) {
-        try {
-            if (texto.equals("")) {
-                Toast.makeText(MainActivity.this, "Digite uma tarefa ", Toast.LENGTH_SHORT).show();
-            } else {
-                tarefaLista = new Tarefa();
-                bancoDeDados.execSQL("INSERT INTO tarefas (tarefa, id) VALUES ('" + texto + "," + String.valueOf(tarefaLista.getId())+ "')");
-                textoTarefa.setText("");
-                itens.add(tarefaLista);
-                recuperarTarefas();
+        botaoAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemTarefa = new Tarefa();
+                itemTarefa.setNome(editarNome.getText().toString());
+                itemTarefa.setDescricao("Teste");
+                editarNome.setText("");
+                listaTarefas.add(itemTarefa);
+                recuperarLista();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        });
     }
-    private void recuperarTarefas() {
-        try {
-            //recuperar as tarefas
-            Cursor cursor = bancoDeDados.rawQuery("SELECT * FROM tarefas ORDER BY id DESC", null);
-            //recuperar o indice
-            int indiceColunaId = cursor.getColumnIndex("id");
-            int indiceColunaTarefa = cursor.getColumnIndex("tarefa");
-            listaTarefas();
-            cursor.moveToFirst();
-            while (cursor != null) {
-                cursor.getString(Integer.parseInt(cursor.getString(indiceColunaId)));
-                cursor.moveToNext();
-            }
-            cursor.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    private void recuperarLista(){
 
-    private void listaTarefas() {
-        try {
-            listaTarefas = findViewById(R.id.listaTarefas);
-            adaptadorTarefa = new AdapterTarefas(this, itens);
-            listaTarefas.setAdapter(adaptadorTarefa);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        adaptador = new AdapterTarefas(this,listaTarefas);
+        viewTarefas.setAdapter(adaptador);
     }
 }
