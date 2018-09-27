@@ -1,8 +1,11 @@
 package com.example.lucasferreira.listatarefas;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,15 +28,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //localizar na activity.
         botaoAdd = findViewById(R.id.botaoAdicionar);
         editarNome = findViewById(R.id.nomeTarefa);
         viewTarefas = findViewById(R.id.listaTarefas);
         listaTarefas = new ArrayList<>();
 
+        //Cria adaptador e lista de tarefas.
+        //adaptador = new AdapterTarefas(this, listaTarefas);
+        //viewTarefas.setAdapter(adaptador);
+
         //cria banco de dados
         bancoDadosTarefas = openOrCreateDatabase("kanban", MODE_PRIVATE, null);
+
         //cria tabela tarefas
-        bancoDadosTarefas.execSQL("CREATE TABLE IF NOT EXISTS tarefas(id INTEGER PRIMARY KEY, nome VARCHAR, descricao VARCHAR)");
+        bancoDadosTarefas.execSQL("CREATE TABLE IF NOT EXISTS tarefas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, descricao VARCHAR)");
 
         botaoAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,22 +65,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void recuperarListaDoIt() {
+        Cursor cursor = bancoDadosTarefas.rawQuery("SELECT * FROM tarefas ORDER BY id DESC ", null);
+        cursor.moveToFirst();
+        listaTarefas.clear();
         adaptador = new AdapterTarefas(this, listaTarefas);
         viewTarefas.setAdapter(adaptador);
+        while (cursor != null) {
+            Tarefa lerTarefa = new Tarefa();
+            lerTarefa.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+            lerTarefa.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
+            lerTarefa.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            listaTarefas.add(lerTarefa);
+            cursor.moveToNext();
+            Log.i("resultado - ", String.valueOf(lerTarefa.getId()));
+            Log.i("nome - ", cursor.getString(cursor.getColumnIndex("nome")));
+        }
+        cursor.close();
     }
 
     private void criarTarefa(Tarefa tarefa) {
         tarefa.setNome(editarNome.getText().toString());
-        tarefa.setDescricao("Teste");
-        listaTarefas.add(tarefa);
-        bancoDadosTarefas.execSQL("INSERT INTO tarefas (id, nome, descricao) VALUES ('" + tarefa.getId()
-                + "','" + tarefa.getNome() + "','" + tarefa.getDescricao() + "')");
+        tarefa.setDescricao("novos testes");
+        bancoDadosTarefas.execSQL("INSERT INTO tarefas (nome, descricao) VALUES ('" + tarefa.getNome() + "','" + tarefa.getDescricao() + "')");
         editarNome.setText("");
     }
-    private void lerTarefa(){
+
+    private void removerTarefa() {
 
     }
-    private void removerTarefa(){
+
+    private void atualizarTarefa() {
 
     }
 }

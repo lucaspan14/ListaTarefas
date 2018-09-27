@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import java.util.List;
 
 public class AdapterTarefas extends BaseAdapter {
@@ -31,11 +30,18 @@ public class AdapterTarefas extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = activity.getLayoutInflater().inflate(R.layout.tarefalayout,parent, false);
+
         Tarefa tarefa = tarefas.get(position);
+
         TextView nome =  view.findViewById(R.id.nome);
         nome.setText(tarefa.getNome());
+
         TextView descricao = view.findViewById(R.id.descricao);
         descricao.setText(tarefa.getDescricao());
+
+        TextView idTarefaView = view.findViewById(R.id.idTarefa);
+        idTarefaView.setText(String.valueOf(tarefa.getId()));
+
         return view;
     }
 }
