@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="#164060">
+    android:background="@drawable/shapes"
+    android:outlineSpotShadowColor="#000000"
+    android:layout_marginEnd="20dp"
+    >
     <TextView
         android:id="@+id/nome"
         android:layout_width="100dp"
@@ -12,10 +15,11 @@
         android:textColorHint="@android:color/holo_blue_light"
         android:textColorLink="@android:color/holo_blue_dark"
         android:textSize="24sp"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        android:layout_margin="5dp"/>
     <TextView
         android:id="@+id/descricao"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:textColor="#FFFFFF"/>
     <TextView

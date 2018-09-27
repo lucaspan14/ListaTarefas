@@ -43,13 +43,18 @@
         android:id="@+id/listaTarefas"
         android:layout_width="305dp"
         android:layout_height="300dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="7dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="244dp"
-        android:divider="#000000"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false"
+        android:divider="#FFFFFF"
+        android:dividerHeight="5dp"
+
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginBottom="10dp"
+        app:layout_goneMarginEnd="5dp"
+        app:layout_goneMarginStart="5dp"
+        app:layout_goneMarginTop="5dp" />
 </android.support.constraint.ConstraintLayout>
