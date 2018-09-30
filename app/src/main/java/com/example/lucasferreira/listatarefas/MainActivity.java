@@ -33,7 +33,11 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //esconde Title bar
-        getSupportActionBar().hide();
+        try {
+            getSupportActionBar().hide();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         setContentView(R.layout.activity_main);
         //localizar na activity.
         //Button botaoAdd = findViewById(R.id.botaoAdicionar);

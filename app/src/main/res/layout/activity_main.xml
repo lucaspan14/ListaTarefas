@@ -7,14 +7,21 @@
     tools:context=".MainActivity"
     >
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@drawable/botao_menu_shape"
-        android:shadowRadius="20dp"
-        android:text="123" />
+    <LinearLayout
+        android:id="@+id/layoutMenu_id"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/botao_menu_shape">
+        <ImageView
+            android:contentDescription="Menu principal"
+            android:id="@+id/botaoMenu_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/menu_icon"/>
+    </LinearLayout>
 
     <HorizontalScrollView
         android:id="@+id/horizontalScroll_id"
@@ -36,11 +43,13 @@
                 android:id="@+id/listaTarefasDo"
                 android:layout_width="332dp"
                 android:layout_height="570dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="60dp"
-                android:layout_marginEnd="7dp"
-                android:background="@color/colorPrimary"
 
+                android:layout_marginEnd="7dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorPrimary"
                 android:divider="#FFFFFF"
                 android:dividerHeight="5dp"
                 android:scrollbars="none"
@@ -67,5 +76,76 @@
 
         </LinearLayout>
     </HorizontalScrollView>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/addTarefaLayout"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="56dp"
+        android:background="#102BA6"
+        app:layout_constraintEnd_toEndOf="@+id/horizontalScroll_id"
+        app:layout_constraintStart_toStartOf="@+id/horizontalScroll_id"
+        app:layout_constraintTop_toTopOf="@+id/horizontalScroll_id">
+
+
+        <EditText
+            android:id="@+id/nomeAddTarefa_id"
+            android:layout_width="261dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:hint="Digite o nome da tarefa."
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/botaoAddTarefa_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Criar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Cancelar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layoutDesc_id"
+            android:layout_width="262dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nomeAddTarefa_id">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/textoAddDesc_id"
+                android:layout_width="261dp"
+                android:layout_height="143dp"
+                android:cursorVisible="true"
+                android:fadeScrollbars="false"
+                android:hint="Descrição"
+                android:keepScreenOn="false"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbars="vertical" />
+        </android.support.design.widget.TextInputLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
