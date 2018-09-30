@@ -2,4 +2,7 @@
     <string name="app_name">ListaTarefas</string>
     <string name="adicionar">Adicionar</string>
     <string name="hint">Tente fazer alguma coisa com essa view</string>
+    <string name="todo">TODO</string>
+    <string name="_1">1</string>
+    <string name="todo">TODO</string>
 </resources>

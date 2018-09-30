@@ -4,57 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <EditText
-        android:id="@+id/nomeTarefa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:hint="@string/hint"
-        android:inputType="textPersonName"
-        android:textColorHint="@android:color/holo_orange_light"
-        app:layout_constraintBottom_toTopOf="@+id/listaTarefas"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
+    tools:context=".MainActivity"
+    >
 
     <Button
-        android:id="@+id/botaoAdicionar"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="40dp"
-        android:hint="@string/hint"
-        android:text="@string/adicionar"
-        app:layout_constraintBottom_toTopOf="@+id/listaTarefas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.232"
-        app:layout_constraintStart_toEndOf="@+id/nomeTarefa"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.162" />
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/botao_menu_shape"
+        android:shadowRadius="20dp"
+        android:text="123" />
 
-    <ListView
-        android:id="@+id/listaTarefas"
-        android:layout_width="305dp"
-        android:layout_height="300dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="244dp"
-        android:divider="#FFFFFF"
-        android:dividerHeight="5dp"
-
-        android:scrollbars="none"
+    <HorizontalScrollView
+        android:id="@+id/horizontalScroll_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginBottom="10dp"
-        app:layout_goneMarginEnd="5dp"
-        app:layout_goneMarginStart="5dp"
-        app:layout_goneMarginTop="5dp" />
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ListView
+                android:id="@+id/listaTarefasDo"
+                android:layout_width="332dp"
+                android:layout_height="570dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="7dp"
+                android:background="@color/colorPrimary"
+
+                android:divider="#FFFFFF"
+                android:dividerHeight="5dp"
+                android:scrollbars="none"
+                app:layout_goneMarginBottom="10dp"
+                app:layout_goneMarginEnd="5dp"
+                app:layout_goneMarginStart="5dp"
+                app:layout_goneMarginTop="5dp" />
+
+            <ListView
+                android:id="@+id/listaTarefasDone"
+                android:layout_width="332dp"
+                android:layout_height="570dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="7dp"
+                android:background="@color/colorAccent"
+                android:divider="#FFFFFF"
+                android:dividerHeight="5dp"
+                android:scrollbars="none"
+                app:layout_goneMarginBottom="10dp"
+                app:layout_goneMarginEnd="5dp"
+                app:layout_goneMarginStart="5dp"
+                app:layout_goneMarginTop="5dp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
 </android.support.constraint.ConstraintLayout>

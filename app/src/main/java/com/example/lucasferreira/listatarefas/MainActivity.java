@@ -13,9 +13,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.view.Window;
+import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.List;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
     private List<Tarefa> listaTarefas;
@@ -27,12 +29,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //esconde barra de menu.
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //esconde Title bar
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         //localizar na activity.
-        Button botaoAdd = findViewById(R.id.botaoAdicionar);
-        editarNome = findViewById(R.id.nomeTarefa);
-        viewTarefas = findViewById(R.id.listaTarefas);
+        //Button botaoAdd = findViewById(R.id.botaoAdicionar);
+        //editarNome = findViewById(R.id.nomeTarefa);
+        viewTarefas = findViewById(R.id.listaTarefasDo);
         listaTarefas = new ArrayList<>();
         //cria banco de dados
         bancoDadosTarefas = openOrCreateDatabase("kanban", MODE_PRIVATE, null);
@@ -58,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         //cria tabela tarefas
         bancoDadosTarefas.execSQL("CREATE TABLE IF NOT EXISTS tarefas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, descricao VARCHAR)");
-        botaoAdd.setOnClickListener(new View.OnClickListener() {
+        /*botaoAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -75,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-        });
+        });*/
     }
 
     private void recuperarListaDoIt() {

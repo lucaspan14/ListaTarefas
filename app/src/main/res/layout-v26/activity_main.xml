@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalView_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/horizontal_id"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/listaTarefas"
+                android:layout_width="358dp"
+                android:layout_height="367dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="124dp"
+                android:divider="#FFFFFF"
+                android:dividerHeight="5dp"
+                android:scrollbars="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginBottom="10dp"
+                app:layout_goneMarginEnd="5dp"
+                app:layout_goneMarginStart="5dp"
+                app:layout_goneMarginTop="5dp" />
+
+            <Button
+                android:id="@+id/botaoAdicionar"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="64dp"
+                android:hint="@string/hint"
+                android:text="@string/adicionar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/nomeTarefa"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/nomeTarefa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="68dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/hint"
+                android:inputType="textPersonName"
+                android:textColorHint="@android:color/holo_orange_light"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+    </HorizontalScrollView>
+
+</android.support.constraint.ConstraintLayout>
