@@ -5,11 +5,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText editarNome;
     private Tarefa itemTarefa;
     private SQLiteDatabase bancoDadosTarefas;
+    private ImageView menuBotao;
+    private View addTarefaLayout;
+    private Button botaoAddTarefa;
+    private Button botaoVoltarAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +45,29 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         setContentView(R.layout.activity_main);
+        //Criar botao Menu
+        menuBotao = findViewById(R.id.botaoMenu_id);
+        //localiza botao de cancelar o add tarefa
+        botaoVoltarAdd = findViewById(R.id.cancelarAddTarefa_id);
+        botaoVoltarAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addTarefaLayout.getVisibility() == addTarefaLayout.VISIBLE){
+                    addTarefaLayout.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        //Localiza a janela Add tarefa
+        addTarefaLayout = findViewById(R.id.addTarefaLayout);
+
+        menuBotao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTarefaLayout.setVisibility(View.VISIBLE);
+            }
+        });
         //localizar na activity.
-        //Button botaoAdd = findViewById(R.id.botaoAdicionar);
+        Button botaoAddTarefa = findViewById(R.id.botaoAdicionar);
         //editarNome = findViewById(R.id.nomeTarefa);
         viewTarefas = findViewById(R.id.listaTarefasDo);
         listaTarefas = new ArrayList<>();
@@ -65,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         //cria tabela tarefas
         bancoDadosTarefas.execSQL("CREATE TABLE IF NOT EXISTS tarefas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, descricao VARCHAR)");
         /*botaoAdd.setOnClickListener(new View.OnClickListener() {
