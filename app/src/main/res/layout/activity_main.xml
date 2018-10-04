@@ -7,26 +7,10 @@
     tools:context=".MainActivity"
     >
 
-    <LinearLayout
-        android:id="@+id/layoutMenu_id"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/botao_menu_shape">
-        <ImageView
-            android:contentDescription="Menu principal"
-            android:id="@+id/botaoMenu_id"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/menu_icon"/>
-    </LinearLayout>
-
     <HorizontalScrollView
         android:id="@+id/horizontalScroll_id"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -49,8 +33,8 @@
 
                 android:layout_marginEnd="7dp"
                 android:layout_marginRight="10dp"
-                android:background="@color/colorPrimary"
-                android:divider="#FFFFFF"
+                android:background="@color/corListaDO"
+                android:divider="@color/corListaDO"
                 android:dividerHeight="5dp"
                 android:scrollbars="none"
                 app:layout_goneMarginBottom="10dp"
@@ -65,8 +49,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="60dp"
                 android:layout_marginEnd="7dp"
-                android:background="@color/colorAccent"
-                android:divider="#FFFFFF"
+                android:background="@color/listaDone"
+                android:divider="@color/listaDone"
                 android:dividerHeight="5dp"
                 android:scrollbars="none"
                 app:layout_goneMarginBottom="10dp"
@@ -148,5 +132,22 @@
                 android:scrollbars="vertical" />
         </android.support.design.widget.TextInputLayout>
     </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutMenu_id"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/botao_menu_shape"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/botaoMenu_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Menu principal"
+            android:src="@drawable/menu_icon" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

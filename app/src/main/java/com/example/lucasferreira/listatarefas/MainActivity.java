@@ -1,5 +1,6 @@
 package com.example.lucasferreira.listatarefas;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,14 +25,16 @@ import android.widget.ImageButton;
 public class MainActivity extends AppCompatActivity {
     private List<Tarefa> listaTarefas;
     private ListView viewTarefas;
-    private EditText editarNome;
+    private EditText addNomeTarefa;
+    private EditText addDescricaoTarefa;
     private Tarefa itemTarefa;
     private SQLiteDatabase bancoDadosTarefas;
-    private ImageView menuBotao;
+    private View menuBotao;
     private View addTarefaLayout;
     private Button botaoAddTarefa;
     private Button botaoVoltarAdd;
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +49,15 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_main);
         //Criar botao Menu
-        menuBotao = findViewById(R.id.botaoMenu_id);
+        menuBotao = findViewById(R.id.layoutMenu_id);
         //localiza botao de cancelar o add tarefa
+        addTarefaLayout = findViewById(R.id.addTarefaLayout);
         botaoVoltarAdd = findViewById(R.id.cancelarAddTarefa_id);
         botaoVoltarAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(addTarefaLayout.getVisibility() == addTarefaLayout.VISIBLE){
-                    addTarefaLayout.setVisibility(View.INVISIBLE);
+                    addTarefaLayout.setVisibility(addTarefaLayout.INVISIBLE);
                 }
             }
         });
@@ -63,12 +67,18 @@ public class MainActivity extends AppCompatActivity {
         menuBotao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addTarefaLayout.setVisibility(View.VISIBLE);
+                if(addTarefaLayout.getVisibility() == addTarefaLayout.VISIBLE){
+                    addTarefaLayout.setVisibility(addTarefaLayout.INVISIBLE);
+                }else{
+                    addTarefaLayout.setVisibility(addTarefaLayout.VISIBLE);
+                }
+
             }
         });
         //localizar na activity.
-        Button botaoAddTarefa = findViewById(R.id.botaoAdicionar);
-        //editarNome = findViewById(R.id.nomeTarefa);
+        botaoAddTarefa = findViewById(R.id.botaoAddTarefa_id);
+        addNomeTarefa = findViewById(R.id.nomeAddTarefa_id);
+        addDescricaoTarefa = findViewById(R.id.textoAddDesc_id);
         viewTarefas = findViewById(R.id.listaTarefasDo);
         listaTarefas = new ArrayList<>();
         //cria banco de dados
@@ -94,12 +104,12 @@ public class MainActivity extends AppCompatActivity {
         });
         //cria tabela tarefas
         bancoDadosTarefas.execSQL("CREATE TABLE IF NOT EXISTS tarefas(id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, descricao VARCHAR)");
-        /*botaoAdd.setOnClickListener(new View.OnClickListener() {
+        botaoAddTarefa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    if (editarNome.getText().toString().equals("")) {
-                        Toast.makeText(getApplicationContext(), "Digite o nome", Toast.LENGTH_SHORT).show();
+                    if (addNomeTarefa.getText().toString().equals("") || addDescricaoTarefa.getText().toString().equals("") ) {
+                        Toast.makeText(getApplicationContext(), "Existem campos não preenchidos", Toast.LENGTH_SHORT).show();
                     } else {
                         itemTarefa = new Tarefa();
                         criarTarefa(itemTarefa);
@@ -111,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-        });*/
+        });
     }
 
     private void recuperarListaDoIt() {
@@ -140,10 +150,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void criarTarefa(Tarefa tarefa) {
-        tarefa.setNome(editarNome.getText().toString());
-        tarefa.setDescricao("novos testes");
+        tarefa.setNome(addNomeTarefa.getText().toString());
+        tarefa.setDescricao(addDescricaoTarefa.getText().toString());
         bancoDadosTarefas.execSQL("INSERT INTO tarefas (nome, descricao) VALUES ('" + tarefa.getNome() + "','" + tarefa.getDescricao() + "')");
-        editarNome.setText("");
+        addNomeTarefa.setText("");
     }
 
     private void removerTarefa(Integer id) {

@@ -1,30 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@drawable/shapes"
     >
-    <TextView
-        android:id="@+id/nome"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:textColorHint="@android:color/holo_blue_light"
-        android:textColorLink="@android:color/holo_blue_dark"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:layout_margin="5dp"/>
 
-    <TextView
-        android:id="@+id/descricao"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:textColor="#FFFFFF" />
-    <TextView
-        android:id="@+id/idTarefa"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutConstraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#FFFFFF" />
+        android:background="@drawable/shapes">
+
+        <TextView
+            android:id="@+id/nome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:text="teste"
+            android:textColor="#FFFFFF"
+            android:textColorHint="@android:color/holo_blue_light"
+            android:textColorLink="@android:color/holo_blue_dark"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/descricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="13dp"
+            android:text="teste"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nome" />
+
+        <TextView
+            android:id="@+id/idTarefa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="id"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>
