@@ -7,7 +7,6 @@
     tools:context=".MainActivity"
     android:id="@+id/telaPrincipal"
     >
-
     <HorizontalScrollView
         android:id="@+id/horizontalScroll_id"
         android:layout_width="wrap_content"
@@ -143,22 +142,13 @@
         android:id="@+id/layoutMenu_id"
         android:layout_width="55dp"
         android:layout_height="55dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
         android:background="@drawable/botao_menu_shape"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="efeitoAPI">
+        app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutMenu_id_open"
-        android:layout_width="350dp"
-        android:layout_height="55dp"
-        android:visibility="invisible"
-        android:background="@drawable/botao_menu_shape"
-        android:gravity="center"
-        android:orientation="horizontal">
     </LinearLayout>
 
 

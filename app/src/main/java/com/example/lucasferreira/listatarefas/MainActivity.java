@@ -1,38 +1,45 @@
 package com.example.lucasferreira.listatarefas;
 
+
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.TimeAnimator;
+import android.animation.TimeInterpolator;
 import android.annotation.SuppressLint;
-import android.app.Activity;
+
 import android.content.Context;
-import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.text.style.UpdateLayout;
 import android.transition.ChangeBounds;
+import android.transition.Fade;
+import android.transition.Transition;
 import android.transition.TransitionManager;
+import android.transition.TransitionValues;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.OvershootInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.Window;
 import android.view.WindowManager;
+
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-import android.widget.ImageButton;
-
 public class MainActivity extends AppCompatActivity {
     private List<Tarefa> listaTarefas;
     private ListView viewTarefas;
@@ -40,13 +47,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText addDescricaoTarefa;
     private Tarefa itemTarefa;
     private SQLiteDatabase bancoDadosTarefas;
-    private View menuBotao;
+    private LinearLayout menuBotao;
     private View addTarefaLayout;
     private Button botaoAddTarefa;
     private Button botaoVoltarAdd;
-    private LinearLayout menuAberto;
     private boolean flag = true;
-
 
     @SuppressLint("WrongConstant")
     @Override
@@ -64,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Criar botao Menu
-        menuBotao = findViewById(R.id.layoutMenu_id);
+        menuBotao =  findViewById(R.id.layoutMenu_id);
+
+        final ViewGroup.LayoutParams params = menuBotao.getLayoutParams();
         //localiza botao de cancelar o add tarefa
         addTarefaLayout = findViewById(R.id.addTarefaLayout);
         botaoVoltarAdd = findViewById(R.id.cancelarAddTarefa_id);
@@ -78,21 +85,13 @@ public class MainActivity extends AppCompatActivity {
         });
         //Localiza a janela Add tarefa
         addTarefaLayout = findViewById(R.id.addTarefaLayout);
-        //localizo o menu aberto
-        menuAberto = findViewById(R.id.layoutMenu_id_open);
 
         menuBotao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    if(menuAberto.getVisibility() == menuAberto.INVISIBLE){
-                        TransitionManager.beginDelayedTransition(menuAberto);
-                        menuAberto.setVisibility(menuAberto.VISIBLE);
 
-                    }else {
-                        TransitionManager.beginDelayedTransition(menuAberto);
-                        menuAberto.setVisibility(menuAberto.INVISIBLE);
-                    }
+                try{
+                    efeitoOpenAndClose(menuBotao,params);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -194,14 +193,26 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    public void efeitoAPI(LinearLayout layout){
-        LinearLayout menu =  findViewById(R.id.layoutMenu_id);
-        ObjectAnimator anim =  ObjectAnimator.ofFloat(menu, "width", 20f, 0f);
+    private void efeitoOpenAndClose(LinearLayout view, final ViewGroup.LayoutParams params){
         if(flag){
-            anim.start();
-        }else{
-            anim.reverse();
+            TransitionManager.beginDelayedTransition(view);
+                    params.width = dpToPx(349);
+                    view.setLayoutParams(params);
+       }else{
+            TransitionManager.beginDelayedTransition(view);
+            params.width = dpToPx(55);
+            view.setLayoutParams(params);
         }
-        flag = !flag;
+       flag = !flag;
+    }
+    //converte dp para px
+    public static int dpToPx(int dp)
+    {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+    //converte px para dp
+    public static int pxToDp(int px)
+    {
+        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
     }
 }
